@@ -42,7 +42,8 @@ def logger() -> Generator[Logger, None, None]:
 def test_init_and_logging(logger: Logger):
     logger.info('init_and_logging')
 
-    my_logger = CloudEventsLogger('test_init_and_logging', app='test_cloudevents_logger', type='com.timberlandchapel.logging',
+    my_logger = CloudEventsLogger('test_init_and_logging', app='test_cloudevents_logger',
+                                  type='com.timberlandchapel.logging',
                                   source='test_cloudevents_logger',
                                   level=logging.DEBUG)
 
@@ -56,7 +57,8 @@ def test_init_and_logging(logger: Logger):
 def test_logging_by_level(func: str, logger: Logger):
     logger.info('logging_by_level')
 
-    my_logger = CloudEventsLogger('test_logging_by_level', app='test_cloudevents_logger', type='com.timberlandchapel.logging',
+    my_logger = CloudEventsLogger('test_logging_by_level', app='test_cloudevents_logger',
+                                  type='com.timberlandchapel.logging',
                                   source='test_cloudevents_logger',
                                   level=logging.DEBUG)
 
@@ -71,7 +73,8 @@ def test_logging_by_level(func: str, logger: Logger):
 def test_logging_by_level_with_data(func: str, logger: Logger):
     logger.info('logging_by_level_with_data')
 
-    my_logger = CloudEventsLogger('test_logging_by_level_with_data', app='test_cloudevents_logger', type='com.timberlandchapel.logging',
+    my_logger = CloudEventsLogger('test_logging_by_level_with_data', app='test_cloudevents_logger',
+                                  type='com.timberlandchapel.logging',
                                   source='test_cloudevents_logger',
                                   level=logging.DEBUG)
 

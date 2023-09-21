@@ -1,9 +1,17 @@
-# this file is *not* meant to cover or endorse the use of GitHub Actions, but rather to
-# help test this project
-
 name: ci
+# ---------------------------------------------------------------------------
+# __author__ = 'Satoshi Imai'
+# __credits__ = ['Satoshi Imai']
+# __version__ = '0.9.0'
+# ---------------------------------------------------------------------------
 
 on: [push, pull_request]
+
+env:
+  # overwritten from ci_environments.txt
+  flake8_ignore:
+  max_complexity: 15
+  max_line_length: 127
 
 jobs:
   test:
@@ -23,6 +31,11 @@ jobs:
       run: python -m pip install -U tox
     - name: Test
       run: python -m tox -e py
+
+    - name: Assign veriables to Env variable
+      run: |
+        cat ci_environments.txt >> $GITHUB_ENV
+      
     - name: Lint with flake8
       run: |
         flake8 --exit-zero --ignore=${{ env.flake8_ignore }} --max-complexity=${{ env.max_complexity }} --max-line-length=${{ env.max_line_length }} --exclude=.svn,CVS,.bzr,.hg,.git,__pycache__,.tox,.eggs,*.egg,nowcast --output-file=flake8.txt .
