@@ -1,0 +1,9 @@
+autopep8
+pytest
+pytest-xdist
+pytest-cov
+pytest-ordering
+yapf
+ipykernel
+pylint
+flake8
