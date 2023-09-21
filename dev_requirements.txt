@@ -7,3 +7,4 @@ yapf
 ipykernel
 pylint
 flake8
+check-manifest
