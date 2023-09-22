@@ -20,21 +20,28 @@ class CloudEventsJsonFormatter(logging.Formatter):
         self._attributes = {
             'app': app,
             'type': type,
-            'source': source,
+            'source': source
         }
 
         super().__init__()
         # end def
 
     def format(self, record: logging.LogRecord) -> str:
-        this_attributes = self._attributes
+        this_attributes = self._attributes.copy()
         this_attributes['msg'] = record.getMessage()
         this_attributes['file'] = record.filename
         this_attributes['line'] = record.lineno
         this_attributes['func'] = record.funcName
 
+        if 'type' in record.__dict__:
+            this_attributes['type'] = record.__dict__['type']
+            # end if
+        if 'source' in record.__dict__:
+            this_attributes['source'] = record.__dict__['source']
+            # end if
         if 'data' in record.__dict__:
             data = record.__dict__['data']
+            this_attributes['datacontenttype'] = 'application/json'
             event = CloudEvent(this_attributes, data)
         else:
             event = CloudEvent(this_attributes)
@@ -53,12 +60,7 @@ class CloudEventsLogger(logging.Logger):
                  app: str,
                  type: str,
                  source: str,
-                 level: int = logging.INFO):
-
-        self._attributes = {
-            'type': type,
-            'source': source,
-        }
+                 level: int = logging.NOTSET):
 
         super().__init__(logger_name, level=level)
 

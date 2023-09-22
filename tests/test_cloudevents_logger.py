@@ -82,6 +82,8 @@ def test_logging_by_level_with_data(func: str, logger: Logger):
     callable(
         'test',
         extra={
+            'type': 'type_overrides',
+            'source': 'source_overrides',
             'data': {
                 'attribute_1': 'value_1',
                 'attribute_2': 20}})
