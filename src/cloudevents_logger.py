@@ -7,8 +7,8 @@
 
 import logging
 
-from cloudevents import conversion
-from cloudevents.http import CloudEvent
+from cloudevents.core.formats.json import JSONFormat
+from cloudevents.v1.http import CloudEvent
 
 
 class CloudEventsJsonFormatter(logging.Formatter):
@@ -22,6 +22,8 @@ class CloudEventsJsonFormatter(logging.Formatter):
             'type': type,
             'source': source
         }
+
+        self._json_formatter = JSONFormat()
 
         super().__init__()
         # end def
@@ -47,7 +49,7 @@ class CloudEventsJsonFormatter(logging.Formatter):
             event = CloudEvent(this_attributes)
             # end if
 
-        payload = conversion.to_json(event).decode()
+        payload = self._json_formatter.write(event).decode()
 
         return payload
         # end def
