@@ -1,4 +1,4 @@
-PYTHON_VER      	:= 3.11.8
+PYTHON_VER      	:= 3.13.12
 VENV  				:= $(PYTHON_VER)-cloudevents_logger
 
 test_all:
